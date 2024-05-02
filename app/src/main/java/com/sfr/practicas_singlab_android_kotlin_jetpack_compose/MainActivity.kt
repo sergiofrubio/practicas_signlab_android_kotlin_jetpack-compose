@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.navigation.Nav
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.ui.theme.Practicas_singlab_android_kotlin_jetpackcomposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,25 +23,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Nav()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Practicas_singlab_android_kotlin_jetpackcomposeTheme {
-        Greeting("Android")
     }
 }
