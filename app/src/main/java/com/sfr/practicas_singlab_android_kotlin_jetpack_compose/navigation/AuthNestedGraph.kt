@@ -1,25 +1,44 @@
 package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.navigation
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
+import LoginScreen
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.navigation
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.ForgotPassScreen
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.LoginScreen
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.RegisterScreen
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.ScreenContent
 
-fun NavGraphBuilder.authGraph(navController: NavController){
-    navigation(startDestination = RoutesNavigation.LoginRoute.route , route = RoutesNavigation.AuthRoute.route){
-        composable(route = RoutesNavigation.LoginRoute.route){
-            LoginScreen(navController = navController)
+fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
+    navigation(
+        route = Graph.AUTHENTICATION,
+        startDestination = AuthScreen.Login.route
+    ) {
+        composable(route = AuthScreen.Login.route) {
+            LoginScreen(
+                onClick = {
+                    navController.popBackStack()
+                    navController.navigate(Graph.HOME)
+                },
+                onSignUpClick = {
+                    navController.navigate(AuthScreen.SignUp.route)
+                },
+                onForgotClick = {
+                    navController.navigate(AuthScreen.Forgot.route)
+                }
+            )
         }
-
-        composable(route = RoutesNavigation.RegisterRoute.route){
+        composable(route = AuthScreen.SignUp.route) {
             RegisterScreen(navController = navController)
         }
-
-        composable(route = RoutesNavigation.ForgotPassRoute.route){
+        composable(route = AuthScreen.Forgot.route) {
             ForgotPassScreen(navController = navController)
         }
     }
+}
+
+sealed class AuthScreen(val route: String) {
+    object Login : AuthScreen(route = "LOGIN")
+    object SignUp : AuthScreen(route = "SIGN_UP")
+    object Forgot : AuthScreen(route = "FORGOT")
 }

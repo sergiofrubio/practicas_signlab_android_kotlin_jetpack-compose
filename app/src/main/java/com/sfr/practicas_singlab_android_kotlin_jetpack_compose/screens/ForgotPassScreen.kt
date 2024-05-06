@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 
+
 @Composable
 fun  ForgotPassScreen(navController: NavController, modifier: Modifier = Modifier){
     var email by remember { mutableStateOf("") }
