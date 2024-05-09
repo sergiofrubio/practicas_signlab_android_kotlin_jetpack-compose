@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.navigation.RootNavigationGraph
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.ui.theme.Practicas_singlab_android_kotlin_jetpackcomposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

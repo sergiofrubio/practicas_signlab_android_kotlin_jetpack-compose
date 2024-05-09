@@ -1,4 +1,4 @@
-package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens
+package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.forgotPass.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

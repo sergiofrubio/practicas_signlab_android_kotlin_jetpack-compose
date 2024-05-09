@@ -5,9 +5,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.ForgotPassScreen
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.RegisterScreen
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.ScreenContent
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.forgotPass.ui.ForgotPassScreen
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.register.ui.RegisterScreen
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
     navigation(
