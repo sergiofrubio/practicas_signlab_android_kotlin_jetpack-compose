@@ -1,3 +1,4 @@
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -8,23 +9,24 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.login.viewModel.LoginViewModel
 
 @Composable
 fun LoginScreen(
-    onClick: () -> Unit,
+    onGoToHome: () -> Unit,
     onSignUpClick: () -> Unit,
     onForgotClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val logInViewModel: LoginViewModel = hiltViewModel()
+    val loginState = logInViewModel.loginState.collectAsState().value
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -34,9 +36,9 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
+            value = loginState.email?: "",
+            onValueChange = {logInViewModel.onEmailChanged(it) },
+            label = { Text("Email") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
@@ -50,8 +52,8 @@ fun LoginScreen(
         )
 
         OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = loginState.password?: "",
+            onValueChange = {  logInViewModel.onPasswordChanged(it) },
             label = { Text("Password") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,7 +71,11 @@ fun LoginScreen(
         )
 
         Button(
-            onClick = onClick,
+            enabled = loginState.isLoginButtonEnabled,
+            onClick = { if (loginState.isLoginButtonEnabled){
+                onGoToHome()
+            } else {
+                Toast.makeText(context, "Compruebe sus datos", Toast.LENGTH_SHORT).show() }},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)

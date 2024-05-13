@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.forgotPass.ui.ForgotPassScreen
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.login.viewModel.LoginViewModel
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.register.ui.RegisterScreen
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
@@ -15,7 +16,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
     ) {
         composable(route = AuthScreen.Login.route) {
             LoginScreen(
-                onClick = {
+                onGoToHome = {
                     navController.popBackStack()
                     navController.navigate(Graph.HOME)
                 },
