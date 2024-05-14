@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.domain.useCases.usesLogin
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.login.event.LoginEvent
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.login.state.Login
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.login.state.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
@@ -15,17 +17,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(private var usesLogin: usesLogin) : ViewModel() {
 
-    private var usesLogin = usesLogin()
+    private var _loginState = MutableStateFlow<Login>(Login.Idle)
+    val loginState: StateFlow<Login> = _loginState.asStateFlow()
 
-    private var _loginState = MutableStateFlow(LoginState())
-    val loginState = _loginState.asStateFlow()
-
-    private val _invalidCredentialsToastChannel = Channel<Boolean>()
-    val invalidCredentialsToastChannel = _invalidCredentialsToastChannel.receiveAsFlow()
-
-    fun onEvent(event: LoginEvent) {
+     fun onEvent(event: LoginEvent) {
         when(event) {
             is LoginEvent.EmailChanged -> {
                 _loginState.update {
@@ -41,16 +38,14 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
             }
 
-            is LoginEvent.Login ->{
+            is LoginEvent.LoginButton ->{
                 val isValidEmail = usesLogin.emailValidator(email = loginState.value.email)
                 val isValidPassword = usesLogin.passwordValidator(pass = loginState.value.password)
 
                 if (isValidPassword && isValidEmail) {
-                    //Reedirigir al login
                     _loginState.update { it.copy(isLoginButtonEnabled = true) }
-
                 } else {
-                    viewModelScope.launch { _invalidCredentialsToastChannel.send(true) }
+                    _loginState.update { it.copy(isLoginButtonEnabled = false) }
                 }
             }
 
@@ -67,7 +62,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         onEvent(LoginEvent.passwordChanged(password))
     }
 
-    fun onLoginButton(email: String, password: String) {
+    private fun onLoginButton(email: String, password: String) {
         onEvent(LoginEvent.LoginButton(email, password))
     }
 
