@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.users.ui.UserScreen
 import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.ScreenContent
 
 @Composable
@@ -16,12 +17,7 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Users.route
     ) {
         composable(route = BottomBarScreen.Users.route) {
-            ScreenContent(
-                name = BottomBarScreen.Users.route,
-                onClick = {
-                    navController.navigate(Graph.DETAILS)
-                }
-            )
+            UserScreen()
         }
         composable(route = BottomBarScreen.Albums.route) {
             ScreenContent(
