@@ -2,7 +2,7 @@ package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Address(
+data class AddressDto(
     @SerializedName("street")
     val street: String,
     @SerializedName("suite")
@@ -12,5 +12,5 @@ data class Address(
     @SerializedName("zipcode")
     val zipcode: String,
     @SerializedName("geo")
-    val geo: Geo
+    val geo: GeoDto
 )

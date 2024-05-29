@@ -1,6 +1,6 @@
 package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.di
 
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.data.api.ApiService
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

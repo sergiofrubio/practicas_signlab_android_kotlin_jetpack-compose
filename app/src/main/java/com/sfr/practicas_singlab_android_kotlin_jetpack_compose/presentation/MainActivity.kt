@@ -1,4 +1,4 @@
-package com.sfr.practicas_singlab_android_kotlin_jetpack_compose
+package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

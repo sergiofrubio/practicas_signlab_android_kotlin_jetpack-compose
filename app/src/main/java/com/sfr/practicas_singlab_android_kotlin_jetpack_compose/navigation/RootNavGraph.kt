@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation.HomeScreen
+import com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens.HomeScreen
 
 @Composable
 fun RootNavigationGraph(navController: NavHostController) {

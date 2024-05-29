@@ -1,4 +1,4 @@
-package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.presentation
+package com.sfr.practicas_singlab_android_kotlin_jetpack_compose.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
